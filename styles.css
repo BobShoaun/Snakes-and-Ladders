@@ -1,0 +1,84 @@
+#board {
+  display: grid;
+  grid-template-columns: repeat(10, 70px);
+  grid-template-rows: repeat(10, 70px);
+  /* column-gap: 10px; */
+  /* row-gap: 10px; */
+}
+
+.tile {
+  position: relative;
+  margin: 0;
+  padding: 5px 5px;
+  font-size: x-small;
+  font-weight: bold;
+  box-sizing: border-box;
+  width: 70px;
+  height: 70px;
+  border: 2px solid gray;
+  background-color: beige;
+}
+
+.player {
+  /* display: flex; */
+}
+
+.player {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 10px ridge cadetblue;
+  margin: auto;
+  background-color: lightblue;
+  z-index: 100;
+}
+
+.ladder-start {
+  /* background-color: chocolate; */
+
+}
+
+.ladder-start {
+  background-color: transparent;
+  border: 10px ridge brown;
+  position: absolute;
+  height: 5px;
+  transform-origin: top left;
+  z-index: 50;
+  /* border-radius: 20%; */
+}
+
+.ladder-end {
+  /* background-color: chocolate; */
+
+}
+
+.coords {
+  position: absolute;
+  margin: 0;
+  top: 0;
+}
+
+#roll-dice {
+  padding: 10px 20px;
+  background-color: brown;
+  color: white;
+  cursor: pointer;
+}
+
+#dice-results {
+  margin-left: 20px;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.m-0 {
+  margin: 0;
+}
