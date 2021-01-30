@@ -9,13 +9,27 @@
 </head>
 
 <body>
-  <h1>Snakes and Ladders</h1>
-  <button id="roll-dice" onclick="rollDice()">Roll dice</button>
-  <p id="dice-results" class="inline m-0"></p>
-  <h1 id="win"></h1>
-  <div id="board">
 
+  <div class="game">
+    <h1>Snakes and Ladders</h1>
+
+    <div class="controls" style="margin-bottom: 20px;">
+      <button id="roll-dice" class="button" onclick="rollDice()">Roll dice</button>
+      <p id="dice-results" class="inline m-0 m-lr"></p>
+
+      <div id="win" hidden style="float: right">
+
+        <h3 class="inline m-0 m-lr">You win!</h3>
+        <button class="button" onclick="restart()">Restart</button>
+      </div>
+    </div>
+
+ 
+    <div id="board">
+  
+    </div>
   </div>
+ 
 
 </body>
 <script src="./script.js"></script>

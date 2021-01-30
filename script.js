@@ -36,7 +36,16 @@ let player2 = new Player(4, 0);
 let ladders = [new Ladder(1, 0, 4, 3), new Ladder(6, 4, 9, 9), new Ladder(5, 0, 4, 8), new Ladder(7, 2, 2, 9)];
 // let snakes = [new Ladder()]
 
+
+
 renderBoard();
+
+function restart() {
+  document.getElementById("win").hidden = true;
+  player.x = 0;
+  player.y = 0;
+  renderBoard();
+}
 
 function initializeBoard() {
 	let board = [];
@@ -111,7 +120,7 @@ function renderBoard() {
 async function rollDice() {
 	let result = Math.floor(Math.random() * 6) + 1;
 	// result = 1;
-  document.getElementById("dice-results").innerText = `results: ${result}`;
+  document.getElementById("dice-results").innerText = `dice: ${result}`;
   document.getElementById("roll-dice").disabled = true;
 	for (let i = 0; i < result; i++) {
 		await new Promise(resolve => setTimeout(resolve, 200));
@@ -162,13 +171,13 @@ function checkWin() {
 		// player wins when they are at x = 0
 		if (player.y >= height - 1 && player.x <= 0) {
 			console.log("WIN");
-			document.getElementById("win").innerText = "YOU WIN!";
+			document.getElementById("win").hidden = false;
 		}
 	} else {
 		// player wins at x = width - 1
 		if (player.y >= height - 1 && player.x >= width - 1) {
 			console.log("WIN");
-			document.getElementById("win").innerText = "YOU WIN!";
+			document.getElementById("win").hidden = false;
 		}
 	}
 }
