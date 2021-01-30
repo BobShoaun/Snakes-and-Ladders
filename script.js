@@ -1,8 +1,11 @@
 class Tile {
 	constructor(x, y) {
 		this.x = x;
-		this.y = y;
+    this.y = y;
+    let colors = ["#faeedb", "#f8e6c9", "#F6DEB7"];
+		this.color = colors[Math.floor(Math.random() * colors.length)];
 	}
+
 }
 
 class Player {
@@ -33,18 +36,21 @@ const width = 10;
 let board = initializeBoard();
 let player = new Player(0, 0);
 let player2 = new Player(4, 0);
-let ladders = [new Ladder(1, 0, 4, 3), new Ladder(6, 4, 9, 9), new Ladder(5, 0, 4, 8), new Ladder(7, 2, 2, 9)];
+let ladders = [
+	new Ladder(1, 0, 4, 3),
+	new Ladder(6, 4, 9, 9),
+	new Ladder(5, 0, 4, 8),
+	new Ladder(7, 2, 2, 9),
+];
 // let snakes = [new Ladder()]
-
-
 
 renderBoard();
 
 function restart() {
-  document.getElementById("win").hidden = true;
-  player.x = 0;
-  player.y = 0;
-  renderBoard();
+	document.getElementById("win").hidden = true;
+	player.x = 0;
+	player.y = 0;
+	renderBoard();
 }
 
 function initializeBoard() {
@@ -71,12 +77,12 @@ function renderBoard() {
 
 			if (player.x == x && player.y == y) {
 				// tile.classList.add("player");
-        let playerDiv = document.createElement("div");
-        playerDiv.classList.add('player');
+				let playerDiv = document.createElement("div");
+				playerDiv.classList.add("player");
 				tile.appendChild(playerDiv);
-      }
-      
-      // if (player2.x == x && player2.y == y) {
+			}
+
+			// if (player2.x == x && player2.y == y) {
 			// 	tile.classList.add("player");
 			// 	// tile.innerHTML = "hello";
 			// 	let playerDiv = document.createElement("div");
@@ -86,11 +92,11 @@ function renderBoard() {
 			ladders.forEach(ladder => {
 				if (ladder.startX == x && ladder.startY == y) {
 					// tile.classList.add("ladder-start");
-          let ladderDiv = document.createElement("div");
-          ladderDiv.classList.add('ladder-start');
+					let ladderDiv = document.createElement("div");
+					ladderDiv.classList.add("ladder-start");
 					tile.appendChild(ladderDiv);
-          
-          // ladder orientation and rotation
+
+					// ladder orientation and rotation
 					ladderDiv.style.width = `${ladder.getLength() * 67}px`;
 					let translation = "translate(35px, -10px)";
 					let angle = (ladder.getAngle() * 180) / Math.PI;
@@ -110,7 +116,9 @@ function renderBoard() {
 			let coords = document.createElement("p");
 			coords.innerText = `${board[y][x].x}${board[y][x].y}`;
 			coords.classList.add("coords");
-			tile.appendChild(coords);
+      tile.appendChild(coords);
+      
+      tile.style.backgroundColor = board[y][x].color;
 
 			output.append(tile);
 		}
@@ -120,16 +128,16 @@ function renderBoard() {
 async function rollDice() {
 	let result = Math.floor(Math.random() * 6) + 1;
 	// result = 1;
-  document.getElementById("dice-results").innerText = `dice: ${result}`;
-  document.getElementById("roll-dice").disabled = true;
+	document.getElementById("dice-results").innerText = `dice: ${result}`;
+	document.getElementById("roll-dice").disabled = true;
 	for (let i = 0; i < result; i++) {
 		await new Promise(resolve => setTimeout(resolve, 200));
 		movePlayer();
 		// setTimeout(movePlayer, 200 * i);
-    checkWin();
-  }
-  document.getElementById("roll-dice").disabled = false;
-  
+		checkWin();
+	}
+	document.getElementById("roll-dice").disabled = false;
+
 	// console.log("finished moving player");
 	checkLadder();
 	return result;
